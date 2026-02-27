@@ -1,6 +1,6 @@
 {
   "name": "@choreruiz/capacitor-node-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A full-fledged Node.js runtime for Capacitor apps. Fork of Capacitor-NodeJS by Rene Hampölz with Capacitor 8 + Xcode 26 fixes.",
   "type": "module",
   "main": "dist/plugin.cjs.js",

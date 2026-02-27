@@ -7,6 +7,9 @@ let package = Package(
     products: [
         .library(
             name: "CapacitorNodejs",
+            targets: ["CapacitorNodejsSwift"]),
+        .library(
+            name: "ChoreruizCapacitorNodeJs",
             targets: ["CapacitorNodejsSwift"])
     ],
     dependencies: [
