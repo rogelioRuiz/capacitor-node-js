@@ -1,5 +1,5 @@
 {
-  "name": "capacitor-node-js",
+  "name": "@choreruiz/capacitor-node-js",
   "version": "1.0.0",
   "description": "A full-fledged Node.js runtime for Capacitor apps. Fork of Capacitor-NodeJS by Rene Hampölz with Capacitor 8 + Xcode 26 fixes.",
   "type": "module",
@@ -55,7 +55,7 @@
     "watch": "tsc --watch",
     "pack:bridge": "cd assets/types/bridge && npm pack --pack-destination ../ && mv ../types-bridge-*.tgz ../bridge.tgz",
     "pack": "npm run pack:bridge && npm pack",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "echo 'Publishing pre-built package'"
   },
   "devDependencies": {
     "@capacitor/android": "^7.0.0",
