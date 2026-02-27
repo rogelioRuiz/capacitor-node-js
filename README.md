@@ -1,8 +1,11 @@
-# capacitor-node-js
+# @choreruiz/capacitor-node-js
+
+[![npm](https://img.shields.io/npm/v/@choreruiz/capacitor-node-js)](https://www.npmjs.com/package/@choreruiz/capacitor-node-js)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A full-fledged **Node.js v18 runtime** for [Capacitor](https://capacitorjs.com/) apps on iOS and Android.
 
-This is a maintained fork of [Capacitor-NodeJS](https://github.com/hampoelz/Capacitor-NodeJS) by Rene Hampölz, with fixes for **Capacitor 8**, **Xcode 26**, and **Swift Package Manager** builds.
+This is a maintained fork of [Capacitor-NodeJS](https://github.com/hampoelz/Capacitor-NodeJS) by Rene Hampolz, with fixes for **Capacitor 8**, **Xcode 26**, and **Swift Package Manager** builds.
 
 ## What's different from upstream
 
@@ -11,25 +14,26 @@ This is a maintained fork of [Capacitor-NodeJS](https://github.com/hampoelz/Capa
 - `builtin_modules` discovery in Capacitor's `public/` subdirectory
 - SPM-first architecture (`ios/Bridge/` + `ios/Swift/` targets)
 - CocoaPods support maintained via updated podspec
+- Published to npm as `@choreruiz/capacitor-node-js` (no more manual `.tgz` installs)
 
 ## Install
 
 ```bash
-npm install capacitor-node-js
+npm install @choreruiz/capacitor-node-js
 npx cap sync
 ```
 
 After `cap sync`, copy the bridge modules into your iOS project:
 
 ```bash
-cp -R node_modules/capacitor-node-js/ios/assets/builtin_modules ios/App/App/public/builtin_modules
+cp -R node_modules/@choreruiz/capacitor-node-js/ios/assets/builtin_modules ios/App/App/public/builtin_modules
 ```
 
-Or add this to your `package.json` scripts:
+Or add this to your `package.json` scripts so it runs automatically:
 
 ```json
 {
-  "cap:sync": "cap sync && cp -R node_modules/capacitor-node-js/ios/assets/builtin_modules ios/App/App/public/builtin_modules 2>/dev/null; true"
+  "cap:sync": "cap sync && cp -R node_modules/@choreruiz/capacitor-node-js/ios/assets/builtin_modules ios/App/App/public/builtin_modules 2>/dev/null; true"
 }
 ```
 
@@ -53,15 +57,17 @@ Place your Node.js project in `public/nodejs-project/` (or whatever `nodeDir` yo
 ### Send messages to Node.js
 
 ```typescript
-import { CapacitorNodeJS } from 'capacitor-node-js';
+import { NodeJS } from '@choreruiz/capacitor-node-js';
 
-await CapacitorNodeJS.send({ eventName: 'myEvent', args: [{ hello: 'world' }] });
+await NodeJS.send({ eventName: 'myEvent', args: [{ hello: 'world' }] });
 ```
 
 ### Receive messages from Node.js
 
 ```typescript
-CapacitorNodeJS.addListener('myResponse', (event) => {
+import { NodeJS } from '@choreruiz/capacitor-node-js';
+
+NodeJS.addListener('myResponse', (event) => {
   console.log('Got from Node:', event.args);
 });
 ```
@@ -82,16 +88,16 @@ channel.send('ready');
 ## Architecture
 
 ```
-┌─────────────────────────────────┐
-│          Capacitor App          │
-│  (WebView / Vue / React / etc)  │
-├─────────────────────────────────┤
-│     CapacitorNodeJS Plugin      │
-│   (Swift / Kotlin bridge)       │
-├─────────────────────────────────┤
-│     NodeMobile.xcframework      │
-│   Node.js v18.20.4 (JIT-less)   │
-└─────────────────────────────────┘
++----------------------------------+
+|          Capacitor App           |
+|  (WebView / Vue / React / etc)   |
++----------------------------------+
+|     CapacitorNodeJS Plugin       |
+|   (Swift / Kotlin bridge)        |
++----------------------------------+
+|     NodeMobile.xcframework       |
+|   Node.js v18.20.4 (JIT-less)    |
++----------------------------------+
 ```
 
 - **iOS**: Swift Package Manager with `CapacitorNodejsBridge` (C++17) and `CapacitorNodejsSwift` targets
@@ -112,7 +118,7 @@ The npm package includes pre-built Node.js binaries:
 
 ## Credits
 
-Built on the excellent [Capacitor-NodeJS](https://github.com/hampoelz/Capacitor-NodeJS) by [Rene Hampölz](https://github.com/hampoelz). Node.js mobile binaries from [aspect-build/aspect-mobile](https://github.com/niceclaude/aspect-mobile).
+Built on the excellent [Capacitor-NodeJS](https://github.com/hampoelz/Capacitor-NodeJS) by [Rene Hampolz](https://github.com/hampoelz). Node.js mobile binaries from [aspect-build/aspect-mobile](https://github.com/niceclaude/aspect-mobile).
 
 ## License
 
